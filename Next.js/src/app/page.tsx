@@ -38,7 +38,7 @@ function Home({ id, name }: HomeProps) {
   );
 }
 
-function App() {
+function Apps() {
   return (
     <div>
       <Home id={1} name="홍길동" />
@@ -46,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default Apps;
