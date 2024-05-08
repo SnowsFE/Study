@@ -4,7 +4,9 @@ import styled from "styled-components";
 function Home() {
   return (
     <Come>
-      <p>안녕하세요</p>
+      <a href="components">
+        <p>안녕하세요</p>
+      </a>
     </Come>
   );
 }
