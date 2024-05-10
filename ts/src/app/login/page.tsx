@@ -1,12 +1,18 @@
 "use client";
-import React from "react";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
-import typenice from "../../public/typenice.png";
+import typenice from "../../../public/typenice.png";
+import profile from "./images.png";
 
 const Home: React.FC = () => {
+  const [showMenu, setShowMenu] = useState(false); // showMenu 상태 추가
+
+  const handleClick = () => {
+    setShowMenu(!showMenu);
+  };
+
   // 페이지 상태 관리를 위한 State 추가
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -26,10 +32,28 @@ const Home: React.FC = () => {
   return (
     <>
       <Div>
-        <Link href={"/login2"}>
+        <Link href={"/"}>
           <Image src={typenice} alt="Logo" width={32} height={32} />
         </Link>
-        <Link href={"/login"}>로그인 &nbsp; 회원가입</Link>
+        <Link href={""}>
+          📬 &nbsp; &nbsp; 🔔 &nbsp; &nbsp; 🔖 &nbsp; &nbsp; 🧍 &nbsp; &nbsp;
+          <ProfileImage
+            src={profile}
+            alt="프로필"
+            width={32}
+            height={32}
+            onClick={handleClick}
+          />
+        </Link>
+        {/* showMenu 상태에 따라 메뉴를 보여줄지 여부를 결정 */}
+        {showMenu && (
+          <Menu>
+            <MenuItem>내 프로필</MenuItem>
+            <MenuItem>내 포인트</MenuItem>
+            <MenuItem>후원 보기</MenuItem>
+            <MenuItem>로그아웃</MenuItem>
+          </Menu>
+        )}
       </Div>
       <Out>
         <span>커뮤니티</span>
@@ -81,6 +105,28 @@ const Home: React.FC = () => {
   );
 };
 
+// 프로필 이미지 스타일 추가
+const ProfileImage = styled(Image)`
+  cursor: pointer;
+`;
+
+// Menu, MenuItem, Div 컴포넌트 및 스타일 추가
+const Menu = styled.div`
+  position: absolute;
+  top: 60px;
+  right: 335px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 2;
+`;
+
+const MenuItem = styled.div`
+  cursor: pointer;
+  margin-bottom: 5px;
+`;
+
 const Div = styled.div`
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   max-width: 1224px;
@@ -93,8 +139,10 @@ const Div = styled.div`
   font-weight: 700;
 
   a {
-    color: rgb(0, 0, 0);
+    display: flex;
     text-decoration: none;
+    align-items: center;
+    gap: 0.5em;
   }
 `;
 
@@ -114,6 +162,7 @@ const Out = styled.div`
   margin: auto;
   gap: 1.75em;
   font-weight: 700;
+  cursor: pointer;
 
   span:hover {
     transform: scale(1.03);
@@ -179,6 +228,7 @@ const Liveranking = styled.div`
   top: 160px;
   right: 50px;
   padding: 0px 10px;
+  cursor: pointer;
 
   @media screen and (max-width: 768px) {
     width: 100%; /* 화면이 작은 경우 전체 너비를 차지하도록 설정 */

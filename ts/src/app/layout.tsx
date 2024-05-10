@@ -26,15 +26,7 @@ export default function RootLayout({
           type="text/css"
         ></link>
       </head>
-      <body>
-        <div className="navbar">
-          <Link href={"/"}>
-            <Image src={typenice} alt="Logo" width={32} height={32} />
-          </Link>
-          <Link href={"/components"}>로그인 &nbsp; 회원가입</Link>
-        </div>
-        {children}
-      </body>
+      <body>{children}</body>
       <div className="footer">
         <p>푸터</p>
       </div>

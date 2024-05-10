@@ -1,12 +1,21 @@
 "use client";
-import React from "react";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
-import typenice from "../../public/typenice.png";
+import typenice from "../../../public/typenice.png";
+import profile from "./images.png";
+import hi from "./1.png";
+import hi2 from "./2.png";
+import category from "./category.png";
 
 const Home: React.FC = () => {
+  const [showMenu, setShowMenu] = useState(false); // showMenu 상태 추가
+
+  const handleClick = () => {
+    setShowMenu(!showMenu);
+  };
+
   // 페이지 상태 관리를 위한 State 추가
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -26,18 +35,33 @@ const Home: React.FC = () => {
   return (
     <>
       <Div>
-        <Link href={"/login2"}>
+        <Link href={"/"}>
           <Image src={typenice} alt="Logo" width={32} height={32} />
         </Link>
-        <Link href={"/login"}>로그인 &nbsp; 회원가입</Link>
+        <Link href={""}>
+          📬 &nbsp; &nbsp; 🔔 &nbsp; &nbsp; 🔖 &nbsp; &nbsp; 🧍 &nbsp; &nbsp;
+          <ProfileImage
+            src={profile}
+            alt="프로필"
+            width={32}
+            height={32}
+            onClick={handleClick}
+          />
+        </Link>
+        {/* showMenu 상태에 따라 메뉴를 보여줄지 여부를 결정 */}
+        {showMenu && (
+          <Menu>
+            <MenuItem>내 프로필</MenuItem>
+            <MenuItem>내 포인트</MenuItem>
+            <MenuItem>후원 보기</MenuItem>
+            <MenuItem>로그아웃</MenuItem>
+          </Menu>
+        )}
       </Div>
       <Out>
-        <span>커뮤니티</span>
-        <span>공고</span>
-        <span>구인구직</span>
-        <span>후원하기</span>
+        <Image src={category} alt="카테고리" />
         <MinNav>
-          <p>AI Drawing 🎨</p>
+          <p>썸네일 생성 🎨</p>
         </MinNav>
       </Out>
       <By></By>
@@ -57,10 +81,11 @@ const Home: React.FC = () => {
         <p>배너</p>
       </Banner>
       <MusicGrid>
-        {Array.from({ length: 12 }, (_, i) => `음원${i + 1}`).map((music) => (
-          <div key={music}>{music}</div>
-        ))}
+        <Image src={hi2} alt="hi2" />
       </MusicGrid>
+      <MusicGrid2>
+        <Image src={hi} alt="hi2" />
+      </MusicGrid2>
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         {Array.from({ length: 5 }, (_, i) => i + 1).map((number) => (
           <button
@@ -81,6 +106,28 @@ const Home: React.FC = () => {
   );
 };
 
+// 프로필 이미지 스타일 추가
+const ProfileImage = styled(Image)`
+  cursor: pointer;
+`;
+
+// Menu, MenuItem, Div 컴포넌트 및 스타일 추가
+const Menu = styled.div`
+  position: absolute;
+  top: 60px;
+  right: 335px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 2;
+`;
+
+const MenuItem = styled.div`
+  cursor: pointer;
+  margin-bottom: 5px;
+`;
+
 const Div = styled.div`
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   max-width: 1224px;
@@ -93,8 +140,10 @@ const Div = styled.div`
   font-weight: 700;
 
   a {
-    color: rgb(0, 0, 0);
+    display: flex;
     text-decoration: none;
+    align-items: center;
+    gap: 0.5em;
   }
 `;
 
@@ -107,13 +156,13 @@ const By = styled.div`
 const Out = styled.div`
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   max-width: 1224px;
-  height: 50px;
   background-color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
   margin: auto;
   gap: 1.75em;
   font-weight: 700;
+  cursor: pointer;
 
   span:hover {
     transform: scale(1.03);
@@ -179,6 +228,7 @@ const Liveranking = styled.div`
   top: 160px;
   right: 50px;
   padding: 0px 10px;
+  cursor: pointer;
 
   @media screen and (max-width: 768px) {
     width: 100%; /* 화면이 작은 경우 전체 너비를 차지하도록 설정 */
@@ -209,23 +259,14 @@ const Banner = styled.div`
 `;
 
 const MusicGrid = styled.div`
-  max-width: 1224px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 50px;
-  width: 100%;
-  margin: 50px auto;
-  text-align: center;
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-  font-size: 20px;
-
-  div {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
+  margin-top: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 중앙 정렬 */
+  img {
+    width: 1224px; /* 이미지의 너비를 1224px로 고정 */
+    height: auto; /* 높이는 자동으로 조정되도록 설정 */
   }
-
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr); /* 작은 화면에서 2개씩 표시 */
   }
@@ -235,4 +276,20 @@ const MusicGrid = styled.div`
   }
 `;
 
+const MusicGrid2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 중앙 정렬 */
+  img {
+    width: 1224px; /* 이미지의 너비를 1224px로 고정 */
+    height: auto; /* 높이는 자동으로 조정되도록 설정 */
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); /* 작은 화면에서 2개씩 표시 */
+  }
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr); /* 아주 작은 화면에서는 1개씩 표시 */
+  }
+`;
 export default Home;
