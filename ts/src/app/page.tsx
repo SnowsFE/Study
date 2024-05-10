@@ -32,10 +32,10 @@ const Home: React.FC = () => {
         <Link href={"/login"}>로그인 &nbsp; 회원가입</Link>
       </Div>
       <Out>
+        <span>음악</span>
         <span>커뮤니티</span>
-        <span>공고</span>
-        <span>구인구직</span>
-        <span>후원하기</span>
+        <span>마이픽</span>
+        <span>모집</span>
         <MinNav>
           <p>AI Drawing 🎨</p>
         </MinNav>

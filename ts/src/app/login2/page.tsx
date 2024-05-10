@@ -283,6 +283,7 @@ const MusicGrid2 = styled.div`
   img {
     width: 1224px; /* 이미지의 너비를 1224px로 고정 */
     height: auto; /* 높이는 자동으로 조정되도록 설정 */
+    overflow: hidden;
   }
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr); /* 작은 화면에서 2개씩 표시 */
